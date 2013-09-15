@@ -8,11 +8,11 @@ def celery_task(task, *args, **kwargs):
         IOLoop.instance().add_future(future,
                                      lambda future: callback(future.result()))
     result = task.delay(*args, **kwargs)
-    IOLoop.instance().add_callback(self._on_result, result, futurn)
+    IOLoop.instance().add_callback(_on_result, result, future)
     return future
 
-def _on_result(self, result, future):
+def _on_result(result, future):
     if result.ready():
         future.set_result(result.result)
     else:
-        IOLoop.instance().add_callback(self._on_result, result, future)
+        IOLoop.instance().add_callback(_on_result, result, future)
