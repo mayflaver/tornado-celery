@@ -17,9 +17,9 @@ Here is a simple "Hello, world" example web app for Tornado::
     import tasks
     
     class MainHandler(tornado.web.RequestHandler):
-    	@coroutine
+        @coroutine
         def get(self):
-	    result = yield tcelery(test, "hello world")
+            result = yield tcelery(test, "hello world")
             self.write("%s" % result )
 
     application = tornado.web.Application([
@@ -40,7 +40,7 @@ Here is tasks.py::
 
     @celery.task
     def test(strs):
-     	return strs
+        return strs
 
 
 run 
