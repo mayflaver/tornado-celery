@@ -11,15 +11,16 @@ Here is a simple "Hello, world" example web app for Tornado::
 
     import tornado.ioloop
     import tornado.web
-    import tcelery
     from tornado.gen import coroutine
+    
     from tasks import test
+    import torncelery
     
     
     class MainHandler(tornado.web.RequestHandler):
         @coroutine
         def get(self):
-            result = yield tcelery.celery_task(test, "hello world")
+            result = yield torncelery.async(test, "hello world")
             self.write("%s" % result )
 
     application = tornado.web.Application([
